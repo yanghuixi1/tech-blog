@@ -725,10 +725,9 @@ label form [type="radio"] {
   color: white;
   font-size: 20px;
   margin: 0 auto;
-  margin-top: 600px;
   width: 200px;
   justify-content: center;
-  position: absolute;
+  transition: all 300ms;
 }
 
 .blog-post {
@@ -759,4 +758,18 @@ label form [type="radio"] {
   background-color: #212529;
   color: white;
   width: 100%;
+  transition: all 300ms;
+}
+
+.post-title:hover {
+  color: grey;
+  cursor: pointer;
+}
+.submit-btn {
+  transition: all 300ms;
+}
+.submit-btn:hover,
+#new-post-btn:hover {
+  transform: scale(1.05);
+  background: #302121;
 }
