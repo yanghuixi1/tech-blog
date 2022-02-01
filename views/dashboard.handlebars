@@ -1,0 +1,34 @@
+{{#each posts as |post|}}
+  <p class="blog-post" id="post-title">{{post.title}}</p>
+  <p class="blog-post" id="post-date">{{post.date_created}}</p>
+{{/each}}
+
+<form class="create-post-box" hidden>
+
+  <h1 class="h3 mb-3 fw-normal">Create New Post</h1>
+
+  <div class="form-floating">
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Title"
+      id="title-input"
+    />
+  </div>
+  <div class="form-floating">
+    <textarea
+      type="text"
+      class="form-input"
+      placeholder="Content"
+      id="content-input"
+    ></textarea>
+  </div>
+
+  <button class="btn btn-dark" type="submit">Create</button>
+  <br />
+
+</form>
+
+<button class="btn btn-dark" id="new-post-btn"> + New Post</button>
+
+<script src="/js/dashboard.js"></script>

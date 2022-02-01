@@ -1,13 +1,34 @@
 // require dependencies
 const router = require("express").Router();
 const apiRoutes = require("./api");
-const { User } = require("../models");
+const postRoutes = require("./postRoutes");
+const { User, Post } = require("../models");
 const auth = require("../utils/auth");
+const moment = require("moment");
 
 router.use("/api", apiRoutes);
+router.use("/posts", postRoutes);
 
-router.get("/", auth.withAuth, async (req, res) => {
-  res.redirect("/dashboard");
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.findAll({ include: [User] });
+    const postsPlain = await posts.map((post) => post.get({ plain: true }));
+
+    // Convert the created date into a more user-friendly format
+    postsPlain.map((post) => {
+      post.date_created = moment(post.date_created).format("MM/DD/YYYY");
+      return post;
+    });
+    console.log(postsPlain);
+
+    res.render("home", {
+      posts: postsPlain,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 router.get("/login", (req, res) => {
@@ -31,15 +52,28 @@ router.get("/signup", (req, res) => {
 
 router.get("/dashboard", auth.withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
+    const currentUser = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
     }); // Fetches the current user that is logged in, as a database object
-    const user = userData.get({ plain: true }); // Converts database object into plain object
+    const posts = await currentUser.getPosts({
+      attributes: { exclude: ["id", "content", "user_id"] },
+    });
+    const userPlain = currentUser.get({ plain: true }); // Converts database object into plain object
+    const postsPlain = await posts.map((post) => post.get({ plain: true }));
+
+    postsPlain.map((post) => {
+      post.date_created = moment(post.date_created).format("MM/DD/YYYY"); // Convert the created date into a more user-friendly format
+      return post;
+    });
+
     res.render("dashboard", {
-      ...user, // Spreads the user object into multiple variables (id and email)
+      ...userPlain, // Spreads the user object into multiple variables (id and email)
+      page_name: "Your Dashboard",
+      posts: postsPlain,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

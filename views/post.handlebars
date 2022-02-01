@@ -1,0 +1,25 @@
+<div class="container" data-post-id={{post.id}}>
+  <h1 class="post-title">{{post.title}}
+    <span id="created-date">Posted by
+      {{post.user.username}}
+      on
+      {{post.date_created}}</span></h1>
+
+  <p class="post-content">{{post.content}}</p>
+</div>
+
+<form class="create-post-box">
+
+  <div class="form-floating">
+    <textarea
+      type="text"
+      class="form-input"
+      placeholder="Content"
+      id="content-input"
+    ></textarea>
+  </div>
+
+  <button class="btn btn-dark" type="submit">Submit</button>
+  <br />
+
+</form>

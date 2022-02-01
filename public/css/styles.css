@@ -116,6 +116,16 @@ form,
   width: 500px;
   justify-content: center;
 }
+.create-post-box {
+  margin: 0 auto;
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  justify-content: center;
+  border: solid 2px #343a40;
+  padding: 35px;
+}
 
 .login-logo img {
   display: flex;
@@ -692,7 +702,7 @@ label form [type="radio"] {
 .logo {
   color: white;
   z-index: 1 !important;
-  font-size: 40px;
+  font-size: 35px;
   /* position: absolute; */
   /* margin-top: 2rem; */
   background: darkgrey;
@@ -701,7 +711,52 @@ label form [type="radio"] {
   width: 350px;
   text-align: center;
   margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 7px 7px grey;
 }
 .logo-container {
   position: absolute;
+  background: #343a40;
+  width: 100%;
+}
+
+#new-post-btn {
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  margin: 0 auto;
+  margin-top: 600px;
+  width: 200px;
+  justify-content: center;
+  position: absolute;
+}
+
+.blog-post {
+  background: darkgrey;
+  font-size: 20px;
+  padding: 1rem;
+  width: 50%;
+  box-shadow: 3px 3px grey;
+  color: white;
+}
+#post-date {
+  float: inline-end;
+  text-align: end;
+}
+.post-content {
+  font-size: 30px;
+}
+.container {
+  border: solid black 2px;
+  margin-top: 10px;
+  /* padding: 10px; */
+}
+#created-date {
+  font-size: 20px;
+  text-align: right;
+}
+.post-title {
+  background-color: #212529;
+  color: white;
+  width: 100%;
 }
